@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lineup</title>
+  <link rel="stylesheet" href="/assets/app.css?v=7">
+</head>
+<body class="no-video">
+  <div class="stage">
+    <video id="stadium" autoplay muted loop playsinline>
+      <source src="/media/stadium.mp4?v=1" type="video/mp4">
+    </video>
+    <div class="atmosphere"></div>
+    <div class="markings" aria-hidden="true"></div>
+    <div class="vignette"></div>
+    <p id="queue" class="queue" hidden></p>
+    <div class="pitch" id="pitch">
+      <div class="slot" data-role="LW" style="--x:16%;--y:17%"><div class="marker" aria-label="LW empty"></div><span class="role">LW</span></div>
+      <div class="slot" data-role="ST" style="--x:50%;--y:11%"><div class="marker" aria-label="ST empty"></div><span class="role">ST</span></div>
+      <div class="slot" data-role="RW" style="--x:84%;--y:17%"><div class="marker" aria-label="RW empty"></div><span class="role">RW</span></div>
+      <div class="slot" data-role="LCM" style="--x:26%;--y:38%"><div class="marker" aria-label="LCM empty"></div><span class="role">LCM</span></div>
+      <div class="slot" data-role="CM" style="--x:50%;--y:38%"><div class="marker" aria-label="CM empty"></div><span class="role">CM</span></div>
+      <div class="slot" data-role="RCM" style="--x:74%;--y:38%"><div class="marker" aria-label="RCM empty"></div><span class="role">RCM</span></div>
+      <div class="slot" data-role="LB" style="--x:12%;--y:62%"><div class="marker" aria-label="LB empty"></div><span class="role">LB</span></div>
+      <div class="slot" data-role="LCB" style="--x:36%;--y:66%"><div class="marker" aria-label="LCB empty"></div><span class="role">LCB</span></div>
+      <div class="slot" data-role="RCB" style="--x:64%;--y:66%"><div class="marker" aria-label="RCB empty"></div><span class="role">RCB</span></div>
+      <div class="slot" data-role="RB" style="--x:88%;--y:62%"><div class="marker" aria-label="RB empty"></div><span class="role">RB</span></div>
+      <div class="slot gk" data-role="GK" style="--x:50%;--y:86%"><div class="marker" aria-label="GK empty"></div><span class="role">GK</span></div>
+    </div>
+    <div id="hold" class="hold" hidden><div id="hold-bar"></div></div>
+  </div>
+  <script src="/assets/app.js?v=3"></script>
+</body>
+</html>
