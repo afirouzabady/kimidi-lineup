@@ -60,7 +60,7 @@ body.no-video .atmosphere { display: block; }
 .court {
   position: absolute;
   top: 2vh;
-  left: 7%;
+  left: calc(50% - 96vh * 68 / 210);
   height: 96vh;
   width: calc(96vh * 68 / 105);
   z-index: 2;
@@ -87,7 +87,7 @@ body.no-video .atmosphere { display: block; }
 
 .title {
   position: absolute;
-  left: calc(7% + 96vh * 68 / 105 + 2.5%);
+  left: calc(50% + 96vh * 68 / 210 + 2.5%);
   right: 2%;
   top: 16vh;
   margin: 0;
