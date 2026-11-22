@@ -103,6 +103,18 @@ body.no-video .atmosphere { display: block; }
   text-shadow: 0 2px 14px rgba(0, 0, 0, 0.72), 0 1px 2px rgba(0, 0, 0, 0.85);
 }
 
+/* Mirrors the title on the other side of the court, centred on its two lines. */
+.logo {
+  position: absolute;
+  left: 2%;
+  width: calc(48% - 96vh * 68 / 210 - 2.5%);
+  top: calc(16vh + 7.2vh * 1.05 - 12vh);
+  height: 24vh;
+  object-fit: contain;
+  z-index: 3;
+  filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.6));
+}
+
 .queue {
   position: absolute;
   top: 3vh;
@@ -189,6 +201,7 @@ body.no-video .atmosphere { display: block; }
     top: 1vh;
     font-size: 4vh;
   }
+  .logo { display: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
