@@ -35,6 +35,8 @@ function render(snap) {
     el.innerHTML = `<img class="card enter" alt="${label}" src="${src}">`;
   }
 
+  if (snap.background) showBackground(snap.background);
+
   const queue = document.getElementById("queue");
   if (snap.queue_length > 0) {
     queue.hidden = false;
@@ -77,11 +79,73 @@ function connect() {
   };
 }
 
-const video = document.getElementById("stadium");
-video.addEventListener("playing", () => document.body.classList.remove("no-video"));
-video.addEventListener("error", () => document.body.classList.add("no-video"));
-if (video.error) document.body.classList.add("no-video");
-video.play().catch(() => document.body.classList.add("no-video"));
+const players = [...document.querySelectorAll(".stadium")];
+let front = 0;
+let currentUrl = "";
+let playToken = 0;
+
+function silence(video) {
+  video.defaultMuted = true;
+  if (!video.muted) video.muted = true;
+  if (video.volume !== 0) video.volume = 0;
+}
+
+function showBackground(url) {
+  if (!url || url === currentUrl) return;
+  currentUrl = url;
+  const token = ++playToken;
+  const incoming = players[1 - front];
+  const outgoing = players[front];
+  silence(incoming);
+
+  const reveal = () => {
+    if (token !== playToken) return;
+    incoming.classList.add("on");
+    outgoing.classList.remove("on");
+    front = 1 - front;
+    document.body.classList.remove("no-video");
+  };
+
+  const fail = () => {
+    if (token !== playToken) return;
+    if (!outgoing.classList.contains("on") || outgoing.error) {
+      document.body.classList.add("no-video");
+    }
+  };
+
+  incoming.onerror = fail;
+  const playIncoming = () => {
+    if (token !== playToken) return;
+    silence(incoming);
+    incoming.play().then(reveal).catch(fail);
+  };
+
+  if (incoming.src === url && incoming.readyState >= 2 && !incoming.error) {
+    playIncoming();
+    return;
+  }
+
+  incoming.oncanplay = () => {
+    incoming.oncanplay = null;
+    playIncoming();
+  };
+  incoming.src = url;
+}
+
+for (const video of players) {
+  silence(video);
+  video.addEventListener("volumechange", () => silence(video));
+  video.addEventListener("play", () => silence(video));
+}
+
+const first = players[0];
+if (first.getAttribute("src")) {
+  currentUrl = first.src;
+  silence(first);
+  first.play().then(() => document.body.classList.remove("no-video")).catch(() => {
+    document.body.classList.add("no-video");
+  });
+}
 
 connect();
 tickHold();

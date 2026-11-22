@@ -4,32 +4,57 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Lineup</title>
-  <link rel="stylesheet" href="/assets/app.css?v=7">
+  <link rel="stylesheet" href="/assets/app.css?v=16">
 </head>
 <body class="no-video">
   <div class="stage">
-    <video id="stadium" autoplay muted loop playsinline>
-      <source src="/media/stadium.mp4?v=1" type="video/mp4">
-    </video>
+    <video class="stadium on" id="stadium-a" autoplay muted loop playsinline preload="auto" src="https://clickad-rbvla.hs3.ir/kimdi/backgrounds/hill-dickinson.mp4"></video>
+    <video class="stadium" id="stadium-b" autoplay muted loop playsinline preload="auto"></video>
     <div class="atmosphere"></div>
-    <div class="markings" aria-hidden="true"></div>
-    <div class="vignette"></div>
+    <div class="scrim"></div>
     <p id="queue" class="queue" hidden></p>
-    <div class="pitch" id="pitch">
-      <div class="slot" data-role="LW" style="--x:16%;--y:17%"><div class="marker" aria-label="LW empty"></div><span class="role">LW</span></div>
-      <div class="slot" data-role="ST" style="--x:50%;--y:11%"><div class="marker" aria-label="ST empty"></div><span class="role">ST</span></div>
-      <div class="slot" data-role="RW" style="--x:84%;--y:17%"><div class="marker" aria-label="RW empty"></div><span class="role">RW</span></div>
-      <div class="slot" data-role="LCM" style="--x:26%;--y:38%"><div class="marker" aria-label="LCM empty"></div><span class="role">LCM</span></div>
-      <div class="slot" data-role="CM" style="--x:50%;--y:38%"><div class="marker" aria-label="CM empty"></div><span class="role">CM</span></div>
-      <div class="slot" data-role="RCM" style="--x:74%;--y:38%"><div class="marker" aria-label="RCM empty"></div><span class="role">RCM</span></div>
-      <div class="slot" data-role="LB" style="--x:12%;--y:62%"><div class="marker" aria-label="LB empty"></div><span class="role">LB</span></div>
-      <div class="slot" data-role="LCB" style="--x:36%;--y:66%"><div class="marker" aria-label="LCB empty"></div><span class="role">LCB</span></div>
-      <div class="slot" data-role="RCB" style="--x:64%;--y:66%"><div class="marker" aria-label="RCB empty"></div><span class="role">RCB</span></div>
-      <div class="slot" data-role="RB" style="--x:88%;--y:62%"><div class="marker" aria-label="RB empty"></div><span class="role">RB</span></div>
-      <div class="slot gk" data-role="GK" style="--x:50%;--y:86%"><div class="marker" aria-label="GK empty"></div><span class="role">GK</span></div>
+    <div class="court">
+      <svg class="court-lines" viewBox="0 0 68 105" aria-hidden="true">
+        <g class="line">
+          <rect x="0" y="0" width="68" height="105"/>
+          <line x1="0" y1="52.5" x2="68" y2="52.5"/>
+          <circle cx="34" cy="52.5" r="9.15"/>
+          <rect x="13.84" y="0" width="40.32" height="16.5"/>
+          <rect x="24.84" y="0" width="18.32" height="5.5"/>
+          <path d="M30.34 0 V2.6 H37.66 V0"/>
+          <path d="M26.69 16.5 A9.15 9.15 0 0 0 41.31 16.5"/>
+          <rect x="13.84" y="88.5" width="40.32" height="16.5"/>
+          <rect x="24.84" y="99.5" width="18.32" height="5.5"/>
+          <path d="M30.34 105 V102.4 H37.66 V105"/>
+          <path d="M26.69 88.5 A9.15 9.15 0 0 1 41.31 88.5"/>
+          <path d="M0 1 A1 1 0 0 1 1 0"/>
+          <path d="M67 0 A1 1 0 0 1 68 1"/>
+          <path d="M68 104 A1 1 0 0 1 67 105"/>
+          <path d="M1 105 A1 1 0 0 1 0 104"/>
+        </g>
+        <g class="spot">
+          <circle cx="34" cy="52.5" r="0.7"/>
+          <circle cx="34" cy="11" r="0.55"/>
+          <circle cx="34" cy="94" r="0.55"/>
+        </g>
+      </svg>
+      <div class="pitch" id="pitch">
+        <div class="slot gk" data-role="GK" style="--x:50%;--y:6%"><div class="marker" aria-label="GK empty"></div><span class="role">GK</span></div>
+        <div class="slot" data-role="LB" style="--x:16%;--y:18%"><div class="marker" aria-label="LB empty"></div><span class="role">LB</span></div>
+        <div class="slot" data-role="LCB" style="--x:38%;--y:19%"><div class="marker" aria-label="LCB empty"></div><span class="role">LCB</span></div>
+        <div class="slot" data-role="RCB" style="--x:62%;--y:19%"><div class="marker" aria-label="RCB empty"></div><span class="role">RCB</span></div>
+        <div class="slot" data-role="RB" style="--x:84%;--y:18%"><div class="marker" aria-label="RB empty"></div><span class="role">RB</span></div>
+        <div class="slot" data-role="LCM" style="--x:30%;--y:31%"><div class="marker" aria-label="LCM empty"></div><span class="role">LCM</span></div>
+        <div class="slot" data-role="CM" style="--x:50%;--y:31%"><div class="marker" aria-label="CM empty"></div><span class="role">CM</span></div>
+        <div class="slot" data-role="RCM" style="--x:70%;--y:31%"><div class="marker" aria-label="RCM empty"></div><span class="role">RCM</span></div>
+        <div class="slot" data-role="LW" style="--x:22%;--y:43%"><div class="marker" aria-label="LW empty"></div><span class="role">LW</span></div>
+        <div class="slot" data-role="ST" style="--x:50%;--y:45%"><div class="marker" aria-label="ST empty"></div><span class="role">ST</span></div>
+        <div class="slot" data-role="RW" style="--x:78%;--y:43%"><div class="marker" aria-label="RW empty"></div><span class="role">RW</span></div>
+      </div>
     </div>
+    <h1 class="title">Kimdi Football Dream Team</h1>
     <div id="hold" class="hold" hidden><div id="hold-bar"></div></div>
   </div>
-  <script src="/assets/app.js?v=3"></script>
+  <script src="/assets/app.js?v=4"></script>
 </body>
 </html>

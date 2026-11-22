@@ -13,7 +13,7 @@ from starlette.websockets import WebSocketDisconnected
 from fastapi.responses import FileResponse, JSONResponse, PlainTextResponse
 from fastapi.staticfiles import StaticFiles
 
-from .config import API_KEY, API_SECRET, DATA_DIR, DEV_SIMULATE, HOLD_SECONDS, STATIC_DIR
+from .config import API_KEY, API_SECRET, BACKGROUND_VIDEOS, DATA_DIR, DEV_SIMULATE, HOLD_SECONDS, STATIC_DIR
 from .lineup import Lineup
 
 log = logging.getLogger("card_webhook")
@@ -112,7 +112,7 @@ async def lifespan(app: FastAPI):
     DATA_DIR.mkdir(parents=True, exist_ok=True)
     (STATIC_DIR / "media").mkdir(parents=True, exist_ok=True)
     app.state.hub = Hub()
-    app.state.lineup = Lineup(HOLD_SECONDS, DATA_DIR, app.state.hub.broadcast)
+    app.state.lineup = Lineup(HOLD_SECONDS, DATA_DIR, app.state.hub.broadcast, BACKGROUND_VIDEOS)
     yield
     app.state.lineup.cancel()
 

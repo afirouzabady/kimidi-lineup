@@ -14,7 +14,7 @@ pip install -r requirements.txt
 uvicorn app.main:app --host 0.0.0.0 --port 8000
 ```
 
-Open `http://localhost:8000/`. The page loops `static/media/stadium.mp4` when that file is present. Without it, a dark pitch is the background.
+Open `http://localhost:8000/`. The page loops a muted stadium clip from object storage. Each finished lineup of 11 keeps that clip through the hold, and the next 11 start on the next clip. If a clip cannot play, a dark pitch is the background.
 
 Point the PHP sender at this process:
 

@@ -23,12 +23,14 @@ ROLES = (
 
 
 class Lineup:
-    def __init__(self, hold_seconds: float, data_dir: Path, broadcast):
+    def __init__(self, hold_seconds: float, data_dir: Path, broadcast, backgrounds: tuple[str, ...] = ()):
         self.hold_seconds = hold_seconds
         self.data_dir = data_dir
         self._broadcast = broadcast
+        self.backgrounds = backgrounds
         self.slots: list[dict | None] = [None] * len(ROLES)
         self.phase = "filling"
+        self.team = 0
         self.queue: list[dict] = []
         self.seen: set[str] = set()
         self.hold_until: float | None = None
@@ -93,6 +95,9 @@ class Lineup:
         except asyncio.CancelledError:
             return
         async with self._lock:
+            # The finished eleven keep their clip through the hold.
+            # The next eleven start on the next clip.
+            self.team += 1
             self.slots = [None] * len(ROLES)
             self.phase = "filling"
             self.hold_until = None
@@ -108,9 +113,14 @@ class Lineup:
         slots = []
         for role, card in zip(ROLES, self.slots):
             slots.append({"role": role, "card": card})
+        background = ""
+        if self.backgrounds:
+            background = self.backgrounds[self.team % len(self.backgrounds)]
         return {
             "type": "snapshot",
             "phase": self.phase,
+            "team": self.team,
+            "background": background,
             "queue_length": len(self.queue),
             "hold_until": self.hold_until,
             "hold_seconds": self.hold_seconds,
