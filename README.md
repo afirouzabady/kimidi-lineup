@@ -16,6 +16,8 @@ uvicorn app.main:app --host 0.0.0.0 --port 8000
 
 Open `http://localhost:8000/`. The page loops a muted stadium clip from object storage. Each finished lineup of 11 keeps that clip through the hold, and the next 11 start on the next clip. If a clip cannot play, a dark pitch is the background.
 
+The page is laid out for the 6m x 2.5m event wall, whatever resolution the wall is fed. For a different wall open `/?screen=WxH` (for example `/?screen=5x2`). On a normal monitor open `/?screen=auto`.
+
 Point the PHP sender at this process:
 
 `EXTERNAL_CARD_API_URL` = `http://localhost:8000/webhook`

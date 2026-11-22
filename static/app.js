@@ -147,5 +147,26 @@ if (first.getAttribute("src")) {
   });
 }
 
+// The event wall is 6m x 2.5m. ?screen=WxH sets another wall, ?screen=auto trusts the window.
+const WALL_ASPECT = 6 / 2.5;
+
+function screenAspect() {
+  const value = new URLSearchParams(location.search).get("screen");
+  if (value === "auto") return innerWidth / innerHeight;
+  const match = value && value.match(/^(\d+(?:\.\d+)?)x(\d+(?:\.\d+)?)$/);
+  if (match && Number(match[1]) > 0 && Number(match[2]) > 0) return Number(match[1]) / Number(match[2]);
+  return WALL_ASPECT;
+}
+
+function fitScreen() {
+  const aspect = screenAspect();
+  const root = document.documentElement.style;
+  root.setProperty("--screen-aspect", aspect);
+  root.setProperty("--screen-fit", innerWidth / (innerHeight * aspect));
+}
+
+window.addEventListener("resize", fitScreen);
+fitScreen();
+
 connect();
 tickHold();
